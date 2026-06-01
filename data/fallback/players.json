@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Lucas Paquetá",
+    "position": "Meia",
+    "number": 10,
+    "nationality": "Brasil",
+    "status": "a confirmar",
+    "note": "Retorno ao Flamengo especulado para 2026 — verificar em fontes oficiais antes de usar como fato",
+    "image": "",
+    "source": "https://transfermarkt.com.br"
+  },
+  {
+    "name": "David Luiz",
+    "position": "Zagueiro / Capitão",
+    "number": 23,
+    "nationality": "Brasil",
+    "status": "confirmado",
+    "note": "Capitão e líder do elenco",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  },
+  {
+    "name": "Gerson",
+    "position": "Meia",
+    "number": 8,
+    "nationality": "Brasil",
+    "status": "confirmado",
+    "note": "Titular e peça central do meio-campo",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  },
+  {
+    "name": "Arrascaeta",
+    "position": "Meia-atacante",
+    "number": 14,
+    "nationality": "Uruguai",
+    "status": "confirmado",
+    "note": "Principal criador de jogadas",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  },
+  {
+    "name": "Pedro",
+    "position": "Centroavante",
+    "number": 9,
+    "nationality": "Brasil",
+    "status": "confirmado",
+    "note": "Artilheiro principal do elenco",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  },
+  {
+    "name": "Rossi",
+    "position": "Goleiro",
+    "number": 1,
+    "nationality": "Brasil",
+    "status": "confirmado",
+    "note": "Goleiro titular",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  },
+  {
+    "name": "Everton Cebolinha",
+    "position": "Ponta-esquerda",
+    "number": 11,
+    "nationality": "Brasil",
+    "status": "confirmado",
+    "note": "Titular na ala esquerda",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  },
+  {
+    "name": "De la Cruz",
+    "position": "Meia",
+    "number": 18,
+    "nationality": "Uruguai",
+    "status": "confirmado",
+    "note": "Meia de criação contratado em 2024",
+    "image": "",
+    "source": "https://flamengo.com.br"
+  }
+]
