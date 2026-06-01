@@ -16,7 +16,7 @@ function GaugeCard({ label, probability, factors, disclaimer, color }) {
             data={data}
           >
             <PolarAngleAxis type="number" domain={[0, 100]} angleAxisId={0} tick={false} />
-            <RadialBar dataKey="value" cornerRadius={6} background={{ fill: 'rgba(255,255,255,0.05)' }} />
+            <RadialBar angleAxisId={0} dataKey="value" cornerRadius={6} background={{ fill: 'rgba(255,255,255,0.05)' }} />
           </RadialBarChart>
         </ResponsiveContainer>
         <div className={styles.pctLabel} style={{ color }}>

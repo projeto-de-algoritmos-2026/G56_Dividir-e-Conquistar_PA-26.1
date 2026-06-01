@@ -2,6 +2,7 @@ import {
   ResponsiveContainer,
   ComposedChart,
   Bar,
+  Cell,
   Line,
   XAxis,
   YAxis,
@@ -72,18 +73,14 @@ export default function DifficultyChart({ matches }) {
             strokeDasharray="6 3"
             label={{ value: `Média: ${avg.toFixed(1)}`, fill: '#C89B3C', fontSize: 11, position: 'right' }}
           />
-          <Bar
-            dataKey="difficulty"
-            name="Dificuldade"
-            radius={[4, 4, 0, 0]}
-            fill="#E31D1C"
-            cell={chartData.map((entry) => (
-              <rect
-                key={entry.idx}
+          <Bar dataKey="difficulty" name="Dificuldade" radius={[4, 4, 0, 0]}>
+            {chartData.map((entry) => (
+              <Cell
+                key={`cell-${entry.idx}`}
                 fill={entry.isLibertadores ? '#C89B3C' : '#E31D1C'}
               />
             ))}
-          />
+          </Bar>
           <Line
             type="monotone"
             dataKey="difficulty"
