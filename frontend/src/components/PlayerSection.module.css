@@ -1,0 +1,98 @@
+.wrap {}
+
+.subheading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-light);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.disclaimer {
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.playerCard {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.unconfirmed {
+  opacity: 0.7;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: var(--black-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.initials {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.number {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  background: var(--red);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.position {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.nationality {
+  font-size: 0.73rem;
+  color: var(--gray);
+  margin-top: 1px;
+}
+
+.note {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+  line-height: 1.4;
+}

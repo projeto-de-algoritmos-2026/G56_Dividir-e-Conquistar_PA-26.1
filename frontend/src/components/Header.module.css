@@ -1,0 +1,94 @@
+.header {
+  position: relative;
+  background: linear-gradient(135deg, #0A0A0A 0%, #1a0000 50%, #0A0A0A 100%);
+  border-bottom: 1px solid rgba(227,29,28,0.3);
+  overflow: hidden;
+}
+
+.stripe {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(227,29,28,0.03) 20px,
+    rgba(227,29,28,0.03) 40px
+  );
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.crest svg {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 16px rgba(227,29,28,0.4));
+  flex-shrink: 0;
+}
+
+.titles {
+  flex: 1;
+  min-width: 200px;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(227,29,28,0.3);
+}
+
+.year {
+  color: var(--red);
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.65);
+  font-weight: 400;
+}
+
+.badges {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.metaLabel {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+}
+
+.metaValue {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--gray-light);
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .meta { display: none; }
+  .inner { padding: 28px 12px; gap: 16px; }
+}

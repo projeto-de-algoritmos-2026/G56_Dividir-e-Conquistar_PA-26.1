@@ -1,0 +1,55 @@
+.wrap {
+  background: var(--black-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.chartBlock {}
+
+.chartTitle {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.summary {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.summaryItem {
+  flex: 1;
+  min-width: 160px;
+  border-left: 3px solid;
+  padding-left: 12px;
+}
+
+.summaryComp {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.summaryStats {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.82rem;
+  color: var(--gray-light);
+}
+
+@media (max-width: 640px) {
+  .charts { grid-template-columns: 1fr; }
+}

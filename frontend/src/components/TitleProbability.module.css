@@ -1,0 +1,74 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.gaugeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gaugeWrap {
+  position: relative;
+  height: 160px;
+}
+
+.pctLabel {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-shadow: 0 0 20px currentColor;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+.factorsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.factorItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.factorKey {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray);
+}
+
+.factorVal {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white-muted);
+}
+
+.disclaimer {
+  font-size: 0.72rem;
+  color: var(--gray);
+  line-height: 1.5;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 12px;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .factorsGrid { grid-template-columns: 1fr; }
+}

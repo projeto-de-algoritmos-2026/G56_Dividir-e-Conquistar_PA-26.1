@@ -1,0 +1,59 @@
+.wrap {
+  background: var(--black-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.chartWrap {
+  margin-bottom: 24px;
+}
+
+.cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 120px;
+  background: var(--black-muted);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.month {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stats > div {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.statVal {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

@@ -1,0 +1,191 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.explanation {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.concept, .algo, .interp {
+  background: var(--black-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.concept { border-color: rgba(227,29,28,0.2); }
+.algo { border-color: rgba(200,155,60,0.2); }
+
+.h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: white;
+  margin-bottom: 14px;
+}
+
+.concept p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.code {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: rgba(255,255,255,0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  color: #E8B84B;
+}
+
+.code2 {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  font-size: 0.72rem;
+  color: #A8D8A8;
+  line-height: 1.8;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.complexity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.cmpItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--gray);
+}
+
+.cmpBad {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FF3B3A;
+  font-family: monospace;
+}
+
+.cmpGood {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #22C55E;
+  font-family: monospace;
+}
+
+.cmpArrow {
+  font-size: 1.2rem;
+  color: var(--gray);
+}
+
+.interpGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.interpItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.interpIcon { font-size: 0.85rem; flex-shrink: 0; }
+
+.interpRange {
+  min-width: 70px;
+  color: white;
+  font-size: 0.78rem;
+}
+
+.interpDesc { color: var(--gray-light); }
+
+/* Vector viz */
+.vizSection {
+  background: var(--black-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.vizRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.vecWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vecLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+.vec {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 80px;
+}
+
+.vecItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 20px;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  min-height: 4px;
+}
+
+.vecVal {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+  font-family: monospace;
+}
+
+.vecIdx {
+  font-size: 0.55rem;
+  color: var(--gray);
+}
+
+@media (max-width: 1024px) {
+  .explanation { grid-template-columns: 1fr 1fr; }
+  .interp { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .explanation { grid-template-columns: 1fr; }
+  .vizRow { grid-template-columns: 1fr; }
+}
