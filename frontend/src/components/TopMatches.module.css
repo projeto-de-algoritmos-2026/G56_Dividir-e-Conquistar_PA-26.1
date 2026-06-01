@@ -1,0 +1,72 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--black-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  transition: border-color 0.2s;
+}
+
+.item:hover {
+  border-color: rgba(227,29,28,0.3);
+}
+
+.rank {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+
+.info {
+  flex: 1;
+}
+
+.opponent {
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.metaText {
+  font-size: 0.78rem;
+  color: var(--gray);
+}
+
+.result {
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  min-width: 60px;
+  text-align: center;
+}
+
+.diff {
+  font-size: 1.5rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  min-width: 56px;
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 640px) {
+  .item { flex-wrap: wrap; }
+  .diff { min-width: auto; }
+}
