@@ -39,7 +39,7 @@ def _recent_form_points(matches: list[dict], n: int = 5) -> float:
     return pts
 
 
-def estimate_brasileirao(brasileirao_matches: list[dict]) -> TitleEstimate:
+def estimate_brasileirao(brasileirao_matches: list[dict], standings: dict | None = None) -> TitleEstimate:
     """
     Estima a chance de título do Brasileirão com base no desempenho atual.
 
@@ -58,30 +58,46 @@ def estimate_brasileirao(brasileirao_matches: list[dict]) -> TitleEstimate:
             explanation="Sem jogos suficientes para estimar.",
         )
 
-    wins = sum(1 for m in played if m.get("result", "").strip().upper() == "W")
-    draws = sum(1 for m in played if m.get("result", "").strip().upper() == "D")
-    losses = sum(1 for m in played if m.get("result", "").strip().upper() == "L")
-    n = len(played)
+    # Usa standings reais se disponíveis, senão calcula dos jogos
+    st = standings or {}
+    wins  = st.get("won",  sum(1 for m in played if m.get("result", "").upper() == "W"))
+    draws = st.get("drawn", sum(1 for m in played if m.get("result", "").upper() == "D"))
+    losses = st.get("lost", sum(1 for m in played if m.get("result", "").upper() == "L"))
+    n      = st.get("played", len(played))
+    points = st.get("points", wins * 3 + draws)
+    saldo  = st.get("gd", 0)
+    position = st.get("position", 5)
 
-    points = wins * 3 + draws
     max_points = n * 3
     aproveitamento = points / max_points if max_points > 0 else 0.0
 
-    gf_total = sum(float(m.get("gf", 0) or 0) for m in played)
-    ga_total = sum(float(m.get("ga", 0) or 0) for m in played)
-    saldo = gf_total - ga_total
     gd_factor = _clamp((saldo / (n * 2) + 0.5), 0.0, 1.0)
 
-    form_pts = _recent_form_points(played, n=5)
+    # Forma real do standings ou dos últimos 5 jogos
+    form_list = st.get("form", [])
+    if form_list:
+        form_pts = sum(3 if r == "W" else 1 if r == "D" else 0 for r in form_list[-5:])
+    else:
+        form_pts = _recent_form_points(played, n=5)
     form_factor = form_pts / 15.0
+
+    # Penaliza pelo gap de pontos em relação ao líder
+    leader_pts = st.get("leader", {}).get("points", points) if st else points
+    gap = max(0, leader_pts - points)
+    gap_factor = _clamp(1.0 - gap / 20.0, 0.0, 1.0)
+
+    # Fator de posição (1º=1.0, 5º=0.8, 10º=0.5)
+    position_factor = _clamp((21 - position) / 20, 0.0, 1.0)
 
     historical_factor = 0.72
 
     raw = (
-        aproveitamento * 0.40
-        + form_factor * 0.20
-        + gd_factor * 0.15
-        + historical_factor * 0.25
+        aproveitamento * 0.30
+        + form_factor * 0.15
+        + gd_factor * 0.10
+        + gap_factor * 0.20
+        + position_factor * 0.10
+        + historical_factor * 0.15
     )
     probability = _clamp(raw * 100 * 1.15)
 
@@ -91,13 +107,14 @@ def estimate_brasileirao(brasileirao_matches: list[dict]) -> TitleEstimate:
         factors={
             "aproveitamento": round(aproveitamento * 100, 1),
             "pontos": points,
+            "posição": position,
             "jogos": n,
             "vitorias": wins,
             "empates": draws,
             "derrotas": losses,
             "saldo_gols": int(saldo),
-            "forma_recente_pontos": form_pts,
-            "fator_historico": round(historical_factor * 100, 1),
+            "forma_recente_pts": form_pts,
+            "gap_lider": gap,
         },
         explanation=(
             f"Com {points} pontos em {n} jogos ({round(aproveitamento*100,1)}% de aproveitamento), "
@@ -107,7 +124,7 @@ def estimate_brasileirao(brasileirao_matches: list[dict]) -> TitleEstimate:
     )
 
 
-def estimate_libertadores(libertadores_matches: list[dict]) -> TitleEstimate:
+def estimate_libertadores(libertadores_matches: list[dict], standings: dict | None = None) -> TitleEstimate:
     """
     Estima a chance de título da Libertadores com base no desempenho atual.
 
@@ -126,23 +143,35 @@ def estimate_libertadores(libertadores_matches: list[dict]) -> TitleEstimate:
             explanation="Sem jogos suficientes para estimar.",
         )
 
-    wins = sum(1 for m in played if m.get("result", "").strip().upper() == "W")
-    draws = sum(1 for m in played if m.get("result", "").strip().upper() == "D")
-    losses = sum(1 for m in played if m.get("result", "").strip().upper() == "L")
-    n = len(played)
+    # Usa standings reais se disponíveis
+    st = standings or {}
+    wins   = st.get("group_won",   sum(1 for m in played if m.get("result", "").upper() == "W"))
+    draws  = st.get("group_drawn", sum(1 for m in played if m.get("result", "").upper() == "D"))
+    losses = st.get("group_lost",  sum(1 for m in played if m.get("result", "").upper() == "L"))
+    n      = st.get("group_played", len(played))
+    points = st.get("group_points", wins * 3 + draws)
+    group_pos = st.get("group_position", 1)
+    group_gd  = st.get("group_gd", 0)
+    current_stage = st.get("current_stage", "")
 
-    points = wins * 3 + draws
     max_points = n * 3
     aproveitamento = points / max_points if max_points > 0 else 0.0
 
     away_played = [m for m in played if m.get("venue", "").strip().upper() == "A"]
-    away_wins = sum(1 for m in away_played if m.get("result", "").strip().upper() == "W")
-    away_draws = sum(1 for m in away_played if m.get("result", "").strip().upper() == "D")
+    away_wins  = sum(1 for m in away_played if m.get("result", "").upper() == "W")
+    away_draws = sum(1 for m in away_played if m.get("result", "").upper() == "D")
     away_pts = away_wins * 3 + away_draws
     away_max = len(away_played) * 3
     away_factor = (away_pts / away_max) if away_max > 0 else 0.5
 
-    stage_factor = _detect_stage_factor(played)
+    # Fase real do standings ou detectada dos jogos
+    if current_stage:
+        stage_factor = _stage_name_to_factor(current_stage)
+    else:
+        stage_factor = _detect_stage_factor(played)
+
+    # Bônus por ter passado como 1º do grupo
+    group_bonus = 0.05 if group_pos == 1 else 0.0
 
     form_pts = _recent_form_points(played, n=min(5, n))
     form_factor = form_pts / 15.0
@@ -152,6 +181,7 @@ def estimate_libertadores(libertadores_matches: list[dict]) -> TitleEstimate:
         + stage_factor * 0.30
         + away_factor * 0.20
         + form_factor * 0.15
+        + group_bonus
     )
     probability = _clamp(raw * 100 * 1.10)
 
@@ -160,13 +190,15 @@ def estimate_libertadores(libertadores_matches: list[dict]) -> TitleEstimate:
         probability=round(probability, 1),
         factors={
             "aproveitamento": round(aproveitamento * 100, 1),
-            "pontos": points,
+            "pontos_grupo": points,
+            "pos_grupo": group_pos,
             "jogos": n,
             "vitorias": wins,
             "empates": draws,
             "derrotas": losses,
-            "aproveitamento_fora": round(away_factor * 100, 1),
-            "fase_fator": round(stage_factor * 100, 1),
+            "saldo_gols": group_gd,
+            "aprov_fora": round(away_factor * 100, 1),
+            "fase_atual": current_stage or "Grupos",
             "forma_recente_pontos": form_pts,
         },
         explanation=(
@@ -178,19 +210,22 @@ def estimate_libertadores(libertadores_matches: list[dict]) -> TitleEstimate:
     )
 
 
+def _stage_name_to_factor(stage: str) -> float:
+    """Converte nome de fase em fator numérico."""
+    s = stage.lower()
+    if "final" in s and "semi" not in s and "oitava" not in s and "quarta" not in s:
+        return 0.85
+    if "semi" in s:
+        return 0.70
+    if "quarta" in s or "quarter" in s:
+        return 0.55
+    if "oitava" in s or "round of 16" in s:
+        return 0.40
+    return 0.25
+
+
 def _detect_stage_factor(matches: list[dict]) -> float:
     """Estima qual fase foi alcançada com base nos rounds presentes."""
     rounds = [m.get("round", "").lower() for m in matches]
     combined = " ".join(rounds)
-
-    if "final" in combined and "semi" not in combined:
-        return 0.85
-    if "semifinal" in combined or "semi" in combined:
-        return 0.70
-    if "quartas" in combined or "quarter" in combined:
-        return 0.55
-    if "oitavas" in combined or "round of 16" in combined:
-        return 0.40
-    if "grupo" in combined or "group" in combined:
-        return 0.25
-    return 0.20
+    return _stage_name_to_factor(combined)
