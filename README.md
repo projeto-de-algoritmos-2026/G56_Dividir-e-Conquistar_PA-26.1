@@ -6,6 +6,36 @@
 
 ---
 
+## Vídeo de Apresentação
+
+[![Flamengo 2026 — Contagem de Inversões | Dividir e Conquistar](docs/screenshots/thumbnail.png)](https://youtu.be/jFrN3b-QD4U)
+
+> Clique na imagem para assistir ao vídeo completo no YouTube.
+
+---
+
+## Interface Visual
+
+### Header e Cards de Estatísticas
+![Header e Cards](docs/screenshots/01-header-cards.png)
+
+### Gráfico de Dificuldade e Comparação das Competições
+![Gráfico de Dificuldade](docs/screenshots/02-difficulty-chart.png)
+
+### Análise por Período e Estimativa Heurística de Título
+![Análise Mensal e Probabilidade](docs/screenshots/03-monthly-analysis.png)
+
+### Top 5 Jogos Mais Difíceis e Tabela de Jogos
+![Top 5 e Tabela](docs/screenshots/04-top-matches-table.png)
+
+### Explicação do Algoritmo e Vetor de Dificuldades
+![Contagem de Inversões — Conceito e Algoritmo](docs/screenshots/05-algorithm-explainer.png)
+
+### Elenco 2026
+![Elenco](docs/screenshots/06-players.png)
+
+---
+
 ## Tema
 
 Análise da temporada 2026 do Flamengo no **Brasileirão Série A** e na **Copa Libertadores** usando **Contagem de Inversões** como problema central de Dividir e Conquistar.
