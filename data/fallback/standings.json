@@ -1,0 +1,38 @@
+{
+  "updated_at": "2026-06-01",
+  "brasileirao": {
+    "position": 2,
+    "points": 34,
+    "played": 17,
+    "won": 10,
+    "drawn": 4,
+    "lost": 3,
+    "gf": 31,
+    "ga": 16,
+    "gd": 15,
+    "form": ["W", "D", "L", "W", "L"],
+    "top_scorer": {"name": "Pedro", "goals": 10},
+    "top_assist": {"name": "Samuel Lino", "assists": 6},
+    "leader": {"team": "Palmeiras", "points": 41, "played": 18},
+    "note": "Rodada 18 (31/05) — Flamengo 3-0 Coritiba ainda não contabilizada"
+  },
+  "libertadores": {
+    "group": "A",
+    "group_position": 1,
+    "group_points": 16,
+    "group_played": 6,
+    "group_won": 5,
+    "group_drawn": 1,
+    "group_lost": 0,
+    "group_gf": 14,
+    "group_ga": 2,
+    "group_gd": 12,
+    "current_stage": "Oitavas de Final",
+    "qualified": true,
+    "group_opponents": ["Estudiantes", "Independiente Medellín", "Cusco"],
+    "note": "1º no Grupo A com campanha invicta (5V-1E). Aguardando sorteio das oitavas."
+  },
+  "outros_titulos_2026": [
+    {"competition": "Campeonato Carioca", "status": "Campeão"}
+  ]
+}

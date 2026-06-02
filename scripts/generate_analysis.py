@@ -31,6 +31,14 @@ SRC_API = ROOT / "src" / "api"
 FRONTEND_PUBLIC = ROOT / "frontend" / "public"
 
 
+def _load_standings() -> dict:
+    path = DATA_FALLBACK / "standings.json"
+    if path.exists():
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+
 def load_processed() -> tuple[list[dict], str]:
     path = DATA_PROCESSED / "flamengo_2026_analysis.json"
     if path.exists():
@@ -153,8 +161,9 @@ def main():
     lib_analysis = analyse_group(libertadores, "Copa Libertadores 2026")
     comb_analysis = analyse_group(combined, "Temporada Completa 2026")
 
-    br_estimate = estimate_brasileirao(brasileirao)
-    lib_estimate = estimate_libertadores(libertadores)
+    standings = _load_standings()
+    br_estimate = estimate_brasileirao(brasileirao, standings.get("brasileirao"))
+    lib_estimate = estimate_libertadores(libertadores, standings.get("libertadores"))
 
     top = [match_summary(m) for m in top_hardest(combined, 5)]
     hardest_seq = hardest_consecutive_sequence(combined)
